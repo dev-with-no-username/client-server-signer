@@ -1,0 +1,85 @@
+version: '3'
+
+tasks:
+  run-go-server:
+    dir: server
+    cmds:
+      - go run .
+  
+  build-venv-python:
+    dir: client-python
+    cmds:
+      - |
+        python3 -m venv venv;
+        source venv/bin/activate;
+        pip3 install -r requirements.txt;
+
+  run-python-server:
+    dir: client-python
+    cmds:
+      - |
+        source venv/bin/activate;
+        uvicorn server:app --port 8765 --reload
+  
+  run-python-server-noreload:
+    dir: client-python
+    cmds:
+      - |
+        source venv/bin/activate;
+        uvicorn server:app --port 8765
+  
+  run-python-client:
+    dir: client-python
+    cmds:
+      - |
+        source venv/bin/activate;
+        python3 main.py
+
+  build-js-client:
+    dir: client-js
+    cmds:
+      - npm install
+  
+  run-js-client:
+    dir: client-js
+    cmds:
+      - npm install
+      - node main.js
+  
+  run-js-server:
+    dir: client-js
+    cmds:
+      - npm install
+      - node server.js
+  
+  build-java-client:
+    dir: client-java
+    cmds:
+      - gradle build
+  
+  run-java-client:
+    dir: client-java
+    # deps:
+    #   - build-java-client
+    cmds:
+      - gradle -PmainClass=com.sigv4aSigning.SignV4Sign run
+  
+  run-java-server:
+    dir: client-java
+    cmds:
+      - gradle runMain2
+
+  build-rust-client:
+    dir: client-rust
+    cmds:
+      - cargo build --bin client-rust
+
+  run-rust-client:
+    dir: client-rust
+    cmds:
+      - cargo run --bin client-rust
+
+  run-rust-server:
+    dir: client-rust
+    cmds:
+      - cargo run --bin server

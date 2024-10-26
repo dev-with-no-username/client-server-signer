@@ -1,0 +1,25 @@
+# Python
+*/venv
+*/__pycache__
+
+# VSCode
+.vscode
+
+# Javascript
+*/node_modules
+
+# Rust
+*/target
+
+# Ignore Gradle project-specific cache directory
+.gradle
+client-java/.gradle
+
+# Ignore Gradle build output directory
+build
+client-java/build
+
+.idea
+
+
+
